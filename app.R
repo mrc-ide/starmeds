@@ -42,8 +42,8 @@ Sys.setenv("plotly_api_key" = "yNG8kkWFXvH1HJs2iBrS")
 #i18n <- Translator$new(translation_json_path='translation.json')
 #i18n <- Translator$new(translation_csvs_path = "C:/Users/svalente/Desktop/shiny")
 #i18n <- Translator$new(translation_csvs_path = "/Users/adriangheorghe/Documents/starmeds_shiny")
-#i18n <- Translator$new(translation_csvs_path = ".", translation_csv_config = "config.yml")
-i18n <- Translator$new(translation_csvs_path = "/Users/sara/Desktop/STARmeds stuff/shiny")
+i18n <- Translator$new(translation_csvs_path = ".", translation_csv_config = "config.yml")
+#i18n <- Translator$new(translation_csvs_path = "/Users/sara/Desktop/STARmeds stuff/shiny")
 
 i18n$set_translation_language('en')
 
