@@ -10,7 +10,7 @@ Link to googlesheet with translation function: https://docs.google.com/spreadshe
 
 Versions:
 
-app4_4 -> only one download button for both languages in a new tab + report showing automatically at the end
+app.R (former app4_4) -> only one download button for both languages in a new tab + report showing automatically at the end
 
 app4_3 -> only one download button for both languages in a new tab. code contains attempts to show html in tab.
 
