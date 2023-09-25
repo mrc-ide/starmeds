@@ -11,28 +11,28 @@
 library("shiny") #for web app
 library("tidyverse") #for data manipulation and graphs
 library("ggrepel") #for dynamic labels that avoid overlap
-library("magrittr") #for pipe operator
 library("rsconnect") #for link with shinyapps
+library("magrittr") #for pipe operator
 library("DT") #for data tables
 library("shiny.i18n")
 library("ggplot2")
 library("shinydashboard")
 library("bslib")
-#library(htmlTable)
 library("rmarkdown")
 library("markdown")
 library("png")
 library("plotly")
-library("orca")
 library("webshot")
-#library("kableExtra")
 library(knitr)
 library(dplyr)
-library(shinyjs)
-library(pdftools)
-library(systemfonts)
-library(magick)
 library(htmlwidgets)
+
+#library("orca")
+#library(shinyjs)
+#library(systemfonts)
+#library(magick)
+#library(pdftools)
+
 
 Sys.setenv("plotly_username" = "sara_almeida123")
 Sys.setenv("plotly_api_key" = "yNG8kkWFXvH1HJs2iBrS")
@@ -737,11 +737,11 @@ server <- function(input, output) {
       markdown_content <- 
         if (input$selected_language == "en") {
           # Create the R Markdown content
-          readLines('output_report_eng.rmd')
+          readLines('output_report_eng.Rmd')
         } 
         else if (input$selected_language  == "ind") {
           # Create the R Markdown content
-          readLines('output_report_ind.rmd')
+          readLines('output_report_ind.Rmd')
         } 
       knitted_content <- knitr::knit(text = markdown_content, quiet = TRUE)
       markdown_output <- markdown::markdownToHTML(knitted_content)
