@@ -6,11 +6,8 @@
   - ggrepel
   - htmlwidgets
   - knitr
-  - magick
   - magrittr
   - markdown
-  - orca
-  - pdftools
   - plotly
   - png
   - rmarkdown
@@ -18,7 +15,5 @@
   - shiny
   - shiny.i18n
   - shinydashboard
-  - shinyjs
-  - systemfonts
   - tidyverse
   - webshot
