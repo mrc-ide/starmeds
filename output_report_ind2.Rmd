@@ -65,15 +65,44 @@ knitr::include_graphics("plot1.png")
 
 ### Tabel A1 - Sumber Daya Manusia
 
+```{r, echo=FALSE, results='asis'}
+knitr::kable(prep.hr$data)
+```  
+
 ### Tabel A2 - Biaya Lainnya
 
+```{r, echo=FALSE, results='asis'}
+knitr::kable(prep.other$data)
+```  
 
 ## Kerja lapangan
 
 ### Tabel A3 - Sampel obat yang akan dikumpulkan
 
+```{r, echo=FALSE, results='asis'}
+knitr::kable(fw.samplingframe$data)
+```  
+
+### Tabel A4 - Biaya pengambilan sampel
+```{r, echo=FALSE, results='asis'}
+knitr::kable(fw.samplecost$data)
+```  
+
 ## Analisis dan pelaporan
 
-### Tabel A4 - Sumber Daya Manusia
+### Tabel A5 - Sumber Daya Manusia
 
-### Tabel A5 - Biaya Lainnya
+```{r, echo=FALSE, results='asis'}
+knitr::kable(analysis.hr$data)
+```  
+
+### Table A6 - Biaya laboratorium
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(analysis.lab$data)
+```  
+
+### Table A7 - Biaya lainnya
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(analysis.other$data)
