@@ -34,14 +34,14 @@ Fieldwork,Kerja lapangan
 FTE,FTE
 How to use?,Bagaimana cara menggunakannya?
 Human resources,Sumber daya manusia
-"In the table below, change the expected prevalence (%) of out-of-specification (OOS) samples to obtain estimated costs per OOS sample detected.","Pada tabel di bawah, ubah prevalensi yang diharapkan (%) dari sampel di luar spesifikasi (OOS) untuk mendapatkan perkiraan biaya per sampel OOS yang terdeteksi."
-"Input below the TYPES of meds to be collected, separated by '; '. For example: paracetamol 500mg tab; ibuprofen 400mg caps",",""Masukkan di bawah ini JENIS obat yang akan disampling. Contoh: paracetamol 500mg tab; ibuprofen 400mg kap"
-"Input below the TYPES of outlets from where meds will be collected, separated by '; '. For example: street pharmacy; online pharmacy; clinics",",""Masukkan di bawah ini JENIS outlet tempat sampling obat. Contoh: apotek jalanan; apotek daring; klinik"
+"In the table below, change the expected prevalence (%) of out-of-specification (OOS) samples to obtain estimated costs per OOS sample detected.,""Pada tabel di bawah, ubah prevalensi yang diharapkan (%) dari sampel di luar spesifikasi (OOS) untuk mendapatkan perkiraan biaya per sampel OOS yang terdeteksi."""
+"Input below the TYPES of meds to be collected, separated by '; '. For example: paracetamol 500mg tab; ibuprofen 400mg caps,"",""""Masukkan di bawah ini JENIS obat yang akan disampling. Contoh: paracetamol 500mg tab";" ibuprofen 400mg kap""";
+"Input below the TYPES of outlets from where meds will be collected, separated by '; '. For example: street pharmacy; online pharmacy; clinics,"",""""Masukkan di bawah ini JENIS outlet tempat sampling obat. Contoh: apotek jalanan"; apotek daring;" klinik"""
 Inputs,Input
 Introduction,Perkenalan
 Item,Item
 Laboratory costs,Biaya laboratorium
-", leading to an estimated cost per sample collected of ",", yang mengarah ke perkiraan biaya per sampel yang dikumpulkan dari "
+", leading to an estimated cost per sample collected of ,"", yang mengarah ke perkiraan biaya per sampel yang dikumpulkan dari """
 Medicine,Obat
  medicine samples at a total cost of , sampel obat dengan total biaya 
 Medicine samples to be collected,Sampel obat untuk disampling
@@ -74,11 +74,11 @@ Tables,Tabel
 Target number of samples,Target jumlah sampel
 Test,Tes
 The following three tabs ask you for information that captures expected resources to be used in each of these three phases.,Tiga tab berikut meminta informasi yang menangkap sumber daya yang diharapkan untuk digunakan di masing -masing dari tiga fase ini.
-The Results section produces a summary of expected costs based on the information you have provided.,"Tab akhir ""Hasil"" memuat ringkasan ekspektasi biaya berdasarkan informasi yang telah Anda berikan."
+The Results section produces a summary of expected costs based on the information you have provided.,Tab akhir Hasil memuat ringkasan ekspektasi biaya berdasarkan informasi yang telah Anda berikan.
 The study aims to collect ,Penelitian bertujuan untuk mengumpulkan 
-"The table below will update automatically based on values inputted above. Once you are happy with the structure, double click each table cell to populate it with the average cost of buying sampled medicines","Tabel di bawah ini akan diperbarui secara otomatis berdasarkan nilai yang dimasukkan di atas. Setelah Anda puas dengan strukturnya, klik dua kali setiap sel tabel untuk mengisinya dengan biaya rata-rata untuk membeli sampel obat"
-"The table below will update automatically based on values inputted above. Once you are happy with the structure, double click each table cell to populate it with the target number of medicine samples to be collected for each medicine X outlet combination","Tabel di bawah ini akan diperbarui secara otomatis berdasarkan nilai yang dimasukkan di atas. Setelah Anda senang dengan struktur, klik dua kali setiap sel tabel untuk mengisinya dengan jumlah target sampel obat yang akan dikumpulkan untuk setiap kombinasi obat x outlet"
-"The tool assumes that a generic PMS study entails three phases: preparing the study, collecting the medicine samples, and reporting the results.",Alat ini mengasumsikan bahwa studi PMS generik mensyaratkan tiga fase: mempersiapkan penelitian mengumpulkan sampel obat dan melaporkan hasilnya. 
+"The table below will update automatically based on values inputted above. Once you are happy with the structure, double click each table cell to populate it with the average cost of buying sampled medicines,""Tabel di bawah ini akan diperbarui secara otomatis berdasarkan nilai yang dimasukkan di atas. Setelah Anda puas dengan strukturnya, klik dua kali setiap sel tabel untuk mengisinya dengan biaya rata-rata untuk membeli sampel obat"""
+"The table below will update automatically based on values inputted above. Once you are happy with the structure, double click each table cell to populate it with the target number of medicine samples to be collected for each medicine X outlet combination,""Tabel di bawah ini akan diperbarui secara otomatis berdasarkan nilai yang dimasukkan di atas. Setelah Anda senang dengan struktur, klik dua kali setiap sel tabel untuk mengisinya dengan jumlah target sampel obat yang akan dikumpulkan untuk setiap kombinasi obat x outlet"""
+The tool assumes that a generic PMS study entails three phases: preparing the study collecting the medicine samples and reporting the results.,Alat ini mengasumsikan bahwa studi PMS generik mensyaratkan tiga fase: mempersiapkan penelitian mengumpulkan sampel obat dan melaporkan hasilnya. 
 The total estimated cost of fieldwork is,Total perkiraan biaya adalah
 This interactive calculator allows you to estimate the costs required to conduct your planned post-market surveillance study based on input data that you provide and explicit assumptions. The results are meant to be indicative and to be used only as a guide.,Kalkulator interaktif ini memungkinkan Anda untuk memperkirakan biaya yang diperlukan untuk melakukan studi pengawasan pasca pasar yang Anda rencanakan berdasarkan data input yang Anda berikan dan asumsi eksplisit. Hasilnya hanya berupa perkiraan dan hanya digunakan sebagai panduan.
 This table is informed by information provided in previous tabs.,Tabel ini diinformasikan oleh informasi yang disediakan di tab sebelumnya.
@@ -92,5 +92,6 @@ Value for money,Nilai untuk uang
 Visuals,Visual
 You have entered ',Anda telah memasukkan '
 Report,Laporan
-"To download report based on your inputs, please press the download button below.","Untuk mengunduh laporan berdasarkan masukan anda, silakan tekan tombol unduh di bawah ini."
-"Estimated budget per fieldwork day, INCLUDING staff, equipment, consumables, rent etc. and EXCLUDING the cost of buying sampled medicines:","Perkiraan anggaran per hari kerja lapangan, TERMASUK staf, peralatan, barang habis pakai, sewa dll. dan TIDAK TERMASUK biaya pembelian sampel obat-obatan:"
+"To download report based on your inputs, please press the download button below.,""Untuk mengunduh laporan berdasarkan masukan anda, silakan tekan tombol unduh di bawah ini."""
+"Estimated budget per fieldwork day, INCLUDING staff, equipment, consumables, rent etc. and EXCLUDING the cost of buying sampled medicines:,""Perkiraan anggaran per hari kerja lapangan, TERMASUK staf, peralatan, barang habis pakai, sewa dll. dan TIDAK TERMASUK biaya pembelian sampel obat-obatan:"""
+In the 'Toolkit' tab there are three tabs that ask you for information on expected resources to be used in each of these three phases., Pada tab 'Perangkat alat' ada tiga tab yang menanyakan informasi tentang sumber daya yang diharapkan untuk digunakan dalam masing-masing tiga fase ini.

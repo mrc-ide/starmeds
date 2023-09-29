@@ -5,7 +5,6 @@ header-includes:
    \usepackage{fancyhdr}
    \pagestyle{fancy}
    \setlength\headheight{28pt}
-  # \fancyhead[R]{\includegraphics[width=7cm]{logo3.png}}
     \fancyhead[L]{\textbf{Post-Market Surveillance Costing Tool}}
    \fancyfoot[LE,RO]{}
    \usepackage{helvet}
@@ -14,6 +13,9 @@ output:
   pdf_document:
     keep_tex: yes
 sansfont: Calibri
+params:
+  data: "default_value"  # Default value for data parameter
+  data2: "default_value"  # Default value for data parameter
 ---
 <!--\fontsize{10}{16}
 \selectfont-->
@@ -49,15 +51,39 @@ knitr::kable(res.cost.item$data)
 **Figures 1 and 2** show a graphic visualization how costs are divided in relative terms to the total costs.
 
 ## Figure 1 
-```{r, echo=FALSE, results='asis', out.width = "300px"}
-knitr::include_graphics("plot1.png")
+```{r, echo=FALSE, fig.retina=2}
+library(plotly)
+
+# Access the data passed from the Shiny app
+plot_data <- my_params$data
+
+# Create the plot using the data
+plot <- plot_ly(plot_data, labels = ~Phase, values = ~Cost, type = 'pie') %>% 
+  layout(title = "Costs by Phase",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+# Print the plot
+plot
 ```
 
-## Figure 2
-```{r, echo=FALSE, results='asis', out.width = "300px"}
-knitr::include_graphics("plot2.png")
-```
+#Figure 2
 
+```{r, echo=FALSE, fig.retina=2}
+library(plotly)
+
+# Access the data passed from the Shiny app
+plot_data2 <- my_params$data2
+
+# Create the plot using the data
+plot <- plot_ly(plot_data2, labels = ~Item, values = ~Cost, type = 'pie') %>% 
+  layout(title = "Costs by Item",
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+# Print the plot
+plot
+```
 
 # Appendix -  Input tables 
 

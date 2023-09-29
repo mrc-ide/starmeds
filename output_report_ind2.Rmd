@@ -5,7 +5,7 @@ header-includes:
    \usepackage{fancyhdr}
    \pagestyle{fancy}
    \setlength\headheight{28pt}
-   \fancyhead[R]{\includegraphics[width=7cm]{logo3.png}}
+  # \fancyhead[R]{\includegraphics[width=7cm]{logo3.png}}
     \fancyhead[L]{\textbf{Post-Market Surveillance Costing Tool}}
    \fancyfoot[LE,RO]{}
    \usepackage{helvet}
@@ -15,6 +15,8 @@ output:
     keep_tex: yes
 sansfont: Calibri
 ---
+<!--\fontsize{10}{16}
+\selectfont-->
 
 # Laporan Keluaran
 
@@ -43,21 +45,6 @@ knitr::kable(res.cost.phase$data)
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(res.cost.item$data)
 ```
-
-
-**Gambar 1 dan 2** menunjukkan visualisasi grafis bagaimana biaya dibagi secara relatif terhadap total biaya.
-
-## Gambar 1 
-```{r, echo=FALSE, results='asis', out.width = "300px"}
-knitr::include_graphics("plot1.png")
-```
-
-## Gambar 2
-```{r, echo=FALSE, results='asis', out.width = "300px"}
-knitr::include_graphics("plot1.png")
-```
-
-
 
 # **Lampiran - Tabel masukan**
 
@@ -106,3 +93,5 @@ knitr::kable(analysis.lab$data)
 
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(analysis.other$data)
+
+

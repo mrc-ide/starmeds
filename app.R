@@ -22,11 +22,11 @@ library("rmarkdown")
 library("markdown")
 library("png")
 library("plotly")
-library("webshot")
 library(knitr)
 library(dplyr)
 library(htmlwidgets)
 
+#library("webshot")
 #library("orca")
 #library(shinyjs)
 #library(systemfonts)
@@ -93,13 +93,13 @@ ui <- fluidPage(
                       #list of left hand tabs
                       p(i18n$t("This interactive calculator allows you to estimate the costs required to conduct your planned post-market surveillance study based on input data that you provide and explicit assumptions. The results are meant to be indicative and to be used only as a guide.")),
                       
-                      p(i18n$t("The tool assumes that a generic PMS study entails three phases: preparing the study, collecting the medicine samples, and reporting the results.")),
+                      p(i18n$t("The tool assumes that a generic PMS study entails three phases: preparing the study collecting the medicine samples and reporting the results.")),
                       
-                      p(i18n$t("The following three tabs ask you for information that captures expected resources to be used in each of these three phases.")),
+                      p(i18n$t("In the 'Toolkit' tab there are three tabs that ask you for information on expected resources to be used in each of these three phases.")),
                       
                       p(i18n$t("The Results section produces a summary of expected costs based on the information you have provided.")),
                       
-                      p(i18n$t("Please report any issues at"), tags$a(href="bla@bla.com", "support@starmeds.id")),
+                      p(i18n$t("Please report any issues at"), tags$a(href="support.starmedstool@univpancasila.ac.id", "support.starmedstool@univpancasila.ac.id")),
                       
                       p(tags$a(href="https://starmeds.id/", "STARmeds website"))
              ),
@@ -546,6 +546,17 @@ server <- function(input, output) {
     })
     
     observe({analysis.other$data <- analysis.other.fun()})
+    
+    observeEvent(input$add_btn5, {
+      analysis.other$data[nrow(analysis.other$data) + 1, ] <- NA
+    })
+    
+    observeEvent(input$del_btn5, {
+      if (!is.null(input$analysis_other_rows_selected)) {
+        analysis.other$data <<- analysis.other$data[-input$analysis_other_rows_selected,]
+      }
+    })
+    
     output$analysis_other <- renderDT({analysis.other$data %>%
         datatable(editable = list(target = "cell"),
                   colnames = c(i18n$t("Cost item"), i18n$t("Cost")))
@@ -694,14 +705,9 @@ server <- function(input, output) {
         layout(title = i18n$t("Costs by phase"),
                xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
                yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
-      
-      # Save the plot as an HTML file
-      htmlwidgets::saveWidget(plot, "plot1.html", selfcontained = TRUE)
-      
       # Return the plotly object
       plot
-})
-    webshot("plot1.html", file = "plot1.png")
+    })
     
     output$res_pie_cost_item <- renderPlotly({
       plot <- plot_ly(res.cost.item.fun(), labels = ~Item, values = ~Cost, type = 'pie') %>% 
@@ -709,60 +715,97 @@ server <- function(input, output) {
                xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
                yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
       
-      # Save the plot as an HTML file
-      htmlwidgets::saveWidget(plot, "plot2.html", selfcontained = TRUE)
-      
       # Return the plotly object
       plot
     })
     
-    webshot("plot2.html", file = "plot2.png")
-
-    # Download handler
-    output$downloadBtn <- downloadHandler(
-      filename = "report.pdf",  # Specify the filename for the downloaded PDF file
+    # Define the data you want to pass to the RMarkdown report
+    data_for_report <- reactive({
+      # Calculate or obtain the data needed for the report here
+      # For example, you can call a reactive function to get the data
+      res.cost.phase.fun()
+    })
+    
+    # Define the data you want to pass to the RMarkdown report
+    data_for_report2 <- reactive({
+      # Calculate or obtain the data needed for the report here
+      # For example, you can call a reactive function to get the data
+      res.cost.item.fun()
+    })
+    
+    # Create a reactive plot in the Shiny app
+    output$shiny_plot <- renderPlot({
+      plot(data_for_report()$Phase, data_for_report()$Cost, labels = data_for_report()$Phase, 
+           main = "Costs by Phase", type = "pie")
+    })
+    
+    # Create a reactive plot in the Shiny app
+    output$shiny_plot2 <- renderPlot({
+      plot(data_for_report2()$Item, data_for_report2()$Cost, labels = data_for_report2()$Item, 
+           main = "Costs by Item", type = "pie")
+    })
+    
+    # Define the function to generate the report
+      generate_report <- function() {
+      
+      # Create a temporary directory for the report
+      temp_dir <- tempdir()
+      
+      # Specify the RMarkdown file and output file
+      rmarkdown_file <-  if (input$selected_language == "en") {
+                          "output_report_eng.Rmd"
+                          }
+                         else if (input$selected_language  == "ind") {
+                           "output_report_ind.Rmd"
+                           }
+      
+      output_file <- if (input$selected_language == "en") {
+                      file.path(temp_dir, "output_report_eng.pdf")
+                        }
+                        else if (input$selected_language  == "ind") {
+                        file.path(temp_dir, "output_report_ind.pdf")
+                      }
+      
+      # Define the parameters for the RMarkdown report with a different name (e.g., my_params)
+      my_params <- list(data = data_for_report(),
+                        data2=data_for_report2())
+      
+      # Render the RMarkdown report as PDF
+      rmarkdown::render(input = rmarkdown_file,
+                        output_format = "pdf_document",
+                        output_file = output_file,
+                        params = my_params)
+      
+      return(output_file)
+    }
+    
+    # Download the PDF report
+    output$downloadBtn  <- downloadHandler(
+      filename = function() {
+        "report.pdf"
+      },
       content = function(file) {
-        if (input$selected_language == "en") {
-          # Create the R Markdown content
-          rmarkdown::render("output_report_eng2.Rmd", output_file = file)
-        }
-        else if (input$selected_language  == "ind") {
-          # Create the R Markdown content
-          rmarkdown::render("output_report_ind2.Rmd", output_file = file)
-        }
+        report_path <- generate_report()
+        file.copy(report_path, file)
       }
     )
     
-    output$markdown <- renderUI({
-      markdown_content <- 
-        if (input$selected_language == "en") {
-          # Create the R Markdown content
-          readLines('output_report_eng.Rmd')
-        } 
-        else if (input$selected_language  == "ind") {
-          # Create the R Markdown content
-          readLines('output_report_ind.Rmd')
-        } 
-      knitted_content <- knitr::knit(text = markdown_content, quiet = TRUE)
-      markdown_output <- markdown::markdownToHTML(knitted_content)
-      styled_output <- paste(
-        "<style>",
-        "table {",
-        "  border-collapse: collapse;",
-        "  border-spacing: 0;",
-        "}",
-        "table, th, td {",
-        "  border: 1px solid black;",
-        "  padding: 5px;",
-        "}",
-        "</style>",
-        markdown_output,
-        sep = "\n"
+    output$markdown<- renderUI({
+      if (input$selected_language == "en") {
+        # Create the R Markdown content
+        htmltools::tags$div(
+        HTML(markdown::markdownToHTML(knit('output_report_eng2.Rmd', quiet = TRUE))),
+        id = "embedded-html"
       )
-      HTML(styled_output)
-    })
-    
-    
+      } 
+        else if (input$selected_language  == "ind") {
+        # Create the R Markdown content
+          htmltools::tags$div(
+            HTML(markdown::markdownToHTML(knit('output_report_ind2.Rmd', quiet = TRUE))),
+            id = "embedded-html"
+          )
+    }
+      })
 }
 
 # Run the application 
