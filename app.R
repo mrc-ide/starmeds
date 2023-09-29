@@ -181,6 +181,7 @@ ui <- fluidPage(
              tabPanel(i18n$t("Report"),
                       htmlOutput("tab2_content"),
                       uiOutput('markdown'),
+                      p(i18n$t("Use the Print (Ctrl+P) functionality to print this page or save as PDF file.")),
                       #p(i18n$t("To download report based on your inputs, please press the download button below.")),
                       #plotlyOutput("res_pie_cost_phase2"),
                       #plotlyOutput("res_pie_cost_item2"), 
