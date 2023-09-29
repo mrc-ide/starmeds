@@ -16,4 +16,4 @@ packages:
   - shiny.i18n
   - shinydashboard
   - tidyverse
-  - webshot
+  
