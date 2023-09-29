@@ -181,10 +181,10 @@ ui <- fluidPage(
              tabPanel(i18n$t("Report"),
                       htmlOutput("tab2_content"),
                       uiOutput('markdown'),
-                      p(i18n$t("To download report based on your inputs, please press the download button below.")),
+                      #p(i18n$t("To download report based on your inputs, please press the download button below.")),
                       #plotlyOutput("res_pie_cost_phase2"),
                       #plotlyOutput("res_pie_cost_item2"), 
-                      downloadButton("downloadBtn", "Export report"),
+                      #downloadButton("downloadBtn", "Export report"),
              )
   ),
 )
@@ -719,93 +719,35 @@ server <- function(input, output) {
       plot
     })
     
-    # Define the data you want to pass to the RMarkdown report
-    data_for_report <- reactive({
-      # Calculate or obtain the data needed for the report here
-      # For example, you can call a reactive function to get the data
-      res.cost.phase.fun()
-    })
-    
-    # Define the data you want to pass to the RMarkdown report
-    data_for_report2 <- reactive({
-      # Calculate or obtain the data needed for the report here
-      # For example, you can call a reactive function to get the data
-      res.cost.item.fun()
-    })
-    
-    # Create a reactive plot in the Shiny app
-    output$shiny_plot <- renderPlot({
-      plot(data_for_report()$Phase, data_for_report()$Cost, labels = data_for_report()$Phase, 
-           main = "Costs by Phase", type = "pie")
-    })
-    
-    # Create a reactive plot in the Shiny app
-    output$shiny_plot2 <- renderPlot({
-      plot(data_for_report2()$Item, data_for_report2()$Cost, labels = data_for_report2()$Item, 
-           main = "Costs by Item", type = "pie")
-    })
-    
-    # Define the function to generate the report
-      generate_report <- function() {
-      
-      # Create a temporary directory for the report
-      temp_dir <- tempdir()
-      
-      # Specify the RMarkdown file and output file
-      rmarkdown_file <-  if (input$selected_language == "en") {
-                          "output_report_eng.Rmd"
-                          }
-                         else if (input$selected_language  == "ind") {
-                           "output_report_ind.Rmd"
-                           }
-      
-      output_file <- if (input$selected_language == "en") {
-                      file.path(temp_dir, "output_report_eng.pdf")
-                        }
-                        else if (input$selected_language  == "ind") {
-                        file.path(temp_dir, "output_report_ind.pdf")
-                      }
-      
-      # Define the parameters for the RMarkdown report with a different name (e.g., my_params)
-      my_params <- list(data = data_for_report(),
-                        data2=data_for_report2())
-      
-      # Render the RMarkdown report as PDF
-      rmarkdown::render(input = rmarkdown_file,
-                        output_format = "pdf_document",
-                        output_file = output_file,
-                        params = my_params)
-      
-      return(output_file)
-    }
-    
-    # Download the PDF report
-    output$downloadBtn  <- downloadHandler(
-      filename = function() {
-        "report.pdf"
-      },
-      content = function(file) {
-        report_path <- generate_report()
-        file.copy(report_path, file)
-      }
-    )
-    
-    output$markdown<- renderUI({
-      if (input$selected_language == "en") {
+    output$markdown <- renderUI({
+      markdown_content <- 
+        if (input$selected_language == "en") {
+          # Create the R Markdown content
+          readLines('output_report_eng2.Rmd')
+        } 
+      else if (input$selected_language  == "ind") {
         # Create the R Markdown content
-        htmltools::tags$div(
-        HTML(markdown::markdownToHTML(knit('output_report_eng2.Rmd', quiet = TRUE))),
-        id = "embedded-html"
-      )
+        readLines('output_report_ind2.Rmd')
       } 
-        else if (input$selected_language  == "ind") {
-        # Create the R Markdown content
-          htmltools::tags$div(
-            HTML(markdown::markdownToHTML(knit('output_report_ind2.Rmd', quiet = TRUE))),
-            id = "embedded-html"
-          )
-    }
-      })
+      knitted_content <- knitr::knit(text = markdown_content, quiet = TRUE)
+      markdown_output <- markdown::markdownToHTML(knitted_content)
+      styled_output <- paste(
+        "<style>",
+        "table {",
+        "  border-collapse: collapse;",
+        "  border-spacing: 0;",
+        "}",
+        "table, th, td {",
+        "  border: 1px solid black;",
+        "  padding: 5px;",
+        "}",
+        "</style>",
+        markdown_output,
+        sep = "\n"
+      )
+            HTML(styled_output)
+          })
+        
 }
 
 # Run the application 
