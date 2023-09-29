@@ -9,6 +9,10 @@ Not working properly for all labels, but getting there. Using a csv file with tr
 Link to googlesheet with translation function: https://docs.google.com/spreadsheets/d/11DncuKYrns6HTVeMt9rR50tH3TyhjbwYlw4dcGwyAMY/edit?usp=sharing
 
 Versions:
+app.R (former app4_5) ->  corrected bug on delete/add row in analysis and reporting.
+                          stopped using webshot for plots. plots are now generated in the rmarkdown. 
+                          report showing in tab does not contain plots. 
+                          Small changes to intro.
 
 app.R (former app4_4) -> only one download button for both languages in a new tab + report showing automatically at the end
 
